@@ -14,7 +14,7 @@ include 'header.php';
   </div>
   <h2>LOGIN</h2>
   <br>
-  <form action="login.php">
+  <form action="includes/login.inc.php" method="post">
     <label for="username">Username:</label><br />
     <input type="text" id="username" name="username" placeholder="Username..." /><br />
     <label for="pwd">Password:</label><br />

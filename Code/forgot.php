@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 <body>
-  <h2>Forgotten your password?></h2>
+  <h2>Forgotten your password?</h2>
   <p>Please enter your email address below and we will send you instructions on how to reset your password.</p>
   <form action="forgot.inc.php">
     <label for="email">Email address:</label><br />

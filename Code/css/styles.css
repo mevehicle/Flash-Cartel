@@ -128,6 +128,26 @@ img {
 }
 
 
+a:link {
+  color: rgb(43, 43, 252)
+}
+
+
+a:visited {
+  color: rgb(135, 44, 144);
+}
+
+
+a:hover {
+  color: yellowgreen
+}
+
+
+a:active {
+  color: red
+}
+
+
 .centre {
   text-align: center;
   align-items: center;
