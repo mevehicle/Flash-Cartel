@@ -82,6 +82,7 @@ label {
 
 input[type=text] {
   background-color: white;
+  color: black;
   width: 550px;
   padding: 14px;
   margin-left: auto;
@@ -94,6 +95,7 @@ input[type=text] {
 
 input[type=password] {
   background-color: white;
+  color: black;
   width: 550px;
   color: indigo;
   padding: 14px;
