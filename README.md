@@ -10,6 +10,6 @@ In order to run the programs from VS Code, you will need PHP installed on your d
 5. Minimise the window, go to the main Windows search bar, and enter "environment variables".
 6. Click "Edit the system environment variables"
 7. Go to the "Advanced tab", click "Environment Variables"
-8. In System Variables (the lower window), click on "Path", click the "New" button, and paste in the path from the File Manager.
+8. In System Variables (the lower window), double-click on the word "Path", click the "New" button, and paste in the path from the File Manager.
 9. OK it all, go to Start, and enter CMD.
 10. In the command line, type "php --version", and the response should show the version of PHP you have installed.
