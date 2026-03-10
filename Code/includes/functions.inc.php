@@ -2,7 +2,8 @@
 // This file contains functions that are used in the login and registration processes.
 
 // Check if any input fields in registration form are empty. 
-if (emptyInputSignup($username, $email, $password, $passwordRepeat) !== false) {
+function emptyInputSignup($username, $email, $password, $passwordRepeat)
+{
   $result;
   if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
     $result = true;
@@ -52,7 +53,7 @@ function pwdMatch($password, $passwordRepeat)
 function pwdNotStrong($password)
 {
   $result;
-  if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
+  if (!preg_match("/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*)$/", $password)) {
     $result = true;
   } else {
     $result = false;
@@ -71,7 +72,7 @@ function uidExists($conn, $username, $email)
   $conn = null;
   if ($resultSet) {
     $result = true;
-    return $result;
+    return $resultSet;
   } else {
     $result = false;
     return $result;
@@ -92,4 +93,40 @@ function createUser($conn, $username, $email, $password)
   $resultSet = $stmt->fetch();
   $conn = null;
   header("location: ../register.php?error=none");
+  exit();
+}
+
+function emptyInputLogin($username, $password)
+{
+  $result;
+  if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
+    $result = true;
+  } else {
+    $result = false;
+  }
+  return $result;
+}
+
+function loginUser($conn, $username, $password)
+{
+  $uidExists = uidExists($conn, $username, $email);
+
+  if ($uidExists === false) {
+    header("location: ../login.php?error=wronglogin");
+    exit();
+  }
+
+  $hashedPassword = $uidExists["password"];
+  $checkPwd = password_verify($password, $hashedPassword);
+
+  if ($checkPwd === false) {
+    header("location: ../login.php?error=wronglogin");
+    exit();
+  } else if ($checkpwd === true) {
+    session_start();
+    $_SESSION["user_id"] = $uidExists["user_id"];
+    $_SESSION["username"] = $uidExists["username"];
+    header("location: ../index.php");
+    exit();
+  }
 }

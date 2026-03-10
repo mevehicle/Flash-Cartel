@@ -26,6 +26,16 @@ include 'header.php';
   <br>
   <p>or <a href="register.php">register</a>.</p>
   <br>
+
+  <?php
+  if (isset($_GET["error"])) {
+    if (isset($_GET["error"]) === "emptyinput") {
+      echo "<p> Please fill in the form carefully! </p>";
+    } else if (isset($_GET["error"]) === "wronglogin") {
+      echo "<p> Incorrect login information! </p>";
+    }
+  }
+  ?>
 </body>
 
 </html>
