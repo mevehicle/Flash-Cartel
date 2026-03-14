@@ -1,7 +1,5 @@
 # Flash-Cartel
 Repository for Team 2 in Year 2, Term 2 flash cards project
-# Flash-Cartel
-Repository for Team 2 in Year 2, Term 2 flash cards project
 
 In order to run the programs from VS Code, you will need PHP installed on your device. See https://www.youtube.com/watch?v=2BiYxO1wszM or follow these instructions if you are on Windows:
 
