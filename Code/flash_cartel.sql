@@ -31,7 +31,9 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,9 +43,7 @@ CREATE TABLE `users` (
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
