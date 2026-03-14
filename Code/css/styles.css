@@ -155,3 +155,9 @@ a:active {
   align-items: center;
   justify-content: center;
 }
+
+
+.logo {
+  width: 360px;
+  height: 180px;
+}

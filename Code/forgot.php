@@ -10,4 +10,6 @@ include 'header.php';
     <label for="email">Email address:</label><br />
     <input type="text" id="email" name="email" placeholder="Email" /><br />
     <input type="submit" value="Submit" />
-</body>
+
+    <?php
+    include 'footer.php';

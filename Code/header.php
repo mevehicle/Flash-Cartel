@@ -2,7 +2,7 @@
 session_start();
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,9 +18,3 @@ session_start();
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<?php
-if (isset($_SESSION["user_id"])) {
-  header("location: home.php");
-  exit();
-}
-?>
