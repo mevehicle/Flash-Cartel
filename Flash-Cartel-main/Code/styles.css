@@ -1,0 +1,129 @@
+body {
+  background-color: #7DBBBC;
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  background-color: #DAEDBD;
+  color: rgb(15, 15, 100);
+  max-width: 600px;
+  font-size: 60px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  border-top: 10px;
+  border-left: 50px;
+  border-right: 50px;
+  border-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto; 
+  padding: 20px;
+  border: solid 2px;
+  border-color: #94af8b;
+  border-radius: 5px;
+}
+
+
+h2 {
+  background-color: #E8BAD4;
+  max-width: 600px;
+  font-size: 30px;
+  text-align: center;
+  border-top: 10px;
+  border-left: 50px;
+  border-right: 50px;
+  border-bottom: 20px;
+  border: solid 2px;
+  border-color: #c28dab;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto; 
+  padding: 20px;
+
+}
+
+div {
+  background-color: #DE6B48;
+}
+
+div > p {
+  background-color: #DE6B48;
+}
+
+p {
+  background-color: #F4B9B2;
+  max-width: 600px;
+  color: rgb(67, 62, 134);
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto; 
+  border: solid 2px;
+  border-color: #d18f88;  
+  border-radius: 5px;
+}
+
+form {
+  background-color: #E5B181;
+  max-width: 600px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto; 
+  border: solid 2px;
+  border-color: #a5764a;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  padding-top: 10px;
+
+}
+
+input[type=text] {
+  width: 550px;
+  background-color: white;
+  color: indigo;
+  padding: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  border: solid 1px;
+  border-color: #a5764a;
+  border-radius: 4px;
+}
+
+input[type=password] {
+  width: 550px;
+  background-color: white;
+  color: indigo;
+  padding: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  border: solid 1px;
+  border-color: #a5764a;
+  border-radius: 4px;
+}
+
+input[type=submit] {
+  width: 580px;
+  background-color: powderblue;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  border: solid 1px;
+  border-color: #376ea3;
+  border-radius: 4px;
+  padding: 14px;
+}
