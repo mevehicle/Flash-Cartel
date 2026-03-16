@@ -19,13 +19,13 @@ if (isset($_GET["error"])) {
 ?>
 
 <body>
-  <br />
-  <div class="centre">
-    <img src="images/logo.jpg" alt="Flash Cartel logo" class="logo" />
-  </div>
-  <h2>LOGIN</h2>
-  <br>
   <form action="includes/login.inc.php" method="post">
+    <br />
+    <div class="centre">
+      <img src="images/logo.jpg" alt="Flash Cartel logo" class="logo" />
+    </div>
+    <h2>LOGIN</h2>
+    <br>
     <label for="username">Username:</label><br />
     <input type="text" id="username" name="username" placeholder="Username..." /><br />
     <label for="pwd">Password:</label><br />
