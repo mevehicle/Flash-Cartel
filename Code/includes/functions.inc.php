@@ -23,10 +23,19 @@ function createUser($username, $email, $password)
 
 function getConnection(): PDO
 {
-  require 'config.php';
+ // Read .ini file and create associative array with database connection details.
+  $db = parse_ini_file("config.ini", true);
+
+  // Extract database connection details from associative array and create DSN string.
+  $dbUser = $db["database"]["username"];
+  $dbPassword = $db["database"]["password"];
+  $servername = $db["database"]["hostname"];
+  $dbName = $db["database"]["dbname"];
+
+  $dsn = "mysql:host=$servername;dbname=$dbName;charset=utf8mb4";
   // COMMENT OUT THE ERROR HANDLING LINES TO CONNECT TO THE PRODUCTION DATABASE
   try {
-    $conn = new PDO($dsn, $dbUsername, $dbPassword);
+    $conn = new PDO($dsn, $dbUser, $dbPassword);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   } catch (PDOException $exception) {

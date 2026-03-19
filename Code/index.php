@@ -31,11 +31,12 @@ if (isset($_GET["error"])) {
     <label for="pwd">Password:</label><br />
     <input type="password" id="pwd" name="pwd" placeholder="Password..." />
     <input type="submit" name="submit" value="Submit" />
+    <br>
+    <p><a href="forgot.php">I forgot my password</a></p>
+    <br>
+    <p><a href="register.php">Register</a>.</p>
   </form>
-  <br>
-  <p>or click <a href="forgot.php">I forgot my password</a></p>
-  <br>
-  <p>or <a href="register.php">register</a>.</p>
+
   <br>
 
   <?php
