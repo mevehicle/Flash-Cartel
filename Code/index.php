@@ -7,19 +7,21 @@ if (array_key_exists("user_id", $_SESSION)) {
   header("location: home.php");
   exit();
 }
-
-// Error handling for returned login form.
-if (isset($_GET["error"])) {
-  if ($_GET["error"] === "emptyinput") {
-    echo "<p> Please fill in the form carefully! </p>";
-  } else if ($_GET["error"] === "wronglogin") {
-    echo "<p> Incorrect login information! </p>";
-  }
-}
 ?>
 
 <body>
-  <form action="includes/login.inc.php" method="post">
+  <form class="login" action="includes/login.inc.php" method="post">
+
+    <?php
+    // Error handling for returned login form.
+    if (isset($_GET["error"])) {
+      if ($_GET["error"] === "emptyinput") {
+        echo "<p> Please fill in the form carefully! </p>";
+      } else if ($_GET["error"] === "wronglogin") {
+        echo "<p> Incorrect login information! </p>";
+      }
+    }
+    ?>
     <br />
     <div class="centre">
       <img src="images/logo.jpg" alt="Flash Cartel logo" class="logo" />

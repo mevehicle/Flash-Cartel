@@ -23,7 +23,7 @@ function createUser($username, $email, $password)
 
 function getConnection(): PDO
 {
- // Read .ini file and create associative array with database connection details.
+  // Read .ini file and create associative array with database connection details.
   $db = parse_ini_file("config.ini", true);
 
   // Extract database connection details from associative array and create DSN string.
@@ -140,13 +140,13 @@ function pwdNotStrong($password)
   $result;
   if (!preg_match("/(^[.]{0,7})/", $password)) {
     $result = true;
-  } else if (!preg_match("/[A-Z]/", $password)) {
+  } else if (!preg_match("/[.]*[A-Z]+[.]*/", $password)) {
     $result = true;
-  } else if (!preg_match("/[a-z]/", $password)) {
+  } else if (!preg_match("/[.]*[a-z]+[.]*/", $password)) {
     $result = true;
-  } else if (!preg_match("/[0-9]/", $password)) {
+  } else if (!preg_match("/[.]*[0-9]+[.]*/", $password)) {
     $result = true;
-  } else if (!preg_match("/[^\w]/", $password)) {
+  } else if (preg_match("/[.]*[^\w]+[.]*/", $password)) {
     $result = true;
   } else {
     $result = false;

@@ -7,29 +7,30 @@ if (array_key_exists("user_id", $_SESSION)) {
   header("location: home.php");
   exit();
 }
-
-// Error handling for returned registration form.
-if (isset($_GET["error"])) {
-  if ($_GET["error"] === "emptyinput") {
-    echo "<p> Please fill in the form carefully! </p>";
-  } else if ($_GET["error"] === "invaliduid") {
-    echo "<p> Please choose an appropriate and unique username! </p>";
-  } else if ($_GET["error"] === "invalidemail") {
-    echo "<p> Please enter a valid email address! </p>";
-  } else if ($_GET["error"] === "passwordsdontmatch") {
-    echo "<p> Your passwords do not match! </p>";
-  } else if ($_GET["error"] === "passwordnotstrong") {
-    echo "<p> Passwords need at least 8 characters & must include an uppercase letter,
-       a lowercase letter & a number! </p>";
-  } else if ($_GET["error"] === "none") {
-    echo "<p> You're now registered! </p>";
-  }
-}
 ?>
 
 <body>
 
-  <form action="includes/register.inc.php" method="post">
+  <form class="login" action="includes/register.inc.php" method="post">
+    <?php
+    // Error handling for returned registration form.
+    if (isset($_GET["error"])) {
+      if ($_GET["error"] === "emptyinput") {
+        echo "<p> Please fill in the form carefully! </p>";
+      } else if ($_GET["error"] === "invaliduid") {
+        echo "<p> Please choose an appropriate and unique username! </p>";
+      } else if ($_GET["error"] === "invalidemail") {
+        echo "<p> Please enter a valid email address! </p>";
+      } else if ($_GET["error"] === "passwordsdontmatch") {
+        echo "<p> Your passwords do not match! </p>";
+      } else if ($_GET["error"] === "passwordnotstrong") {
+        echo "<p> Passwords need at least 8 characters & must include an uppercase letter,
+          a lowercase letter and a number. No symbols, though! </p>";
+      } else if ($_GET["error"] === "none") {
+        echo "<p> You're now registered! </p>";
+      }
+    }
+    ?>
     <br>
     <a href="index.php">Login</a>
     <h2>Sign up to Flash Cartel:</h2>

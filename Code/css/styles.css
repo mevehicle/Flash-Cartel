@@ -8,8 +8,25 @@ body {
   justify-content: center;
 }
 
+/* Fabric image for home page */
+body.fabric {
+  background-image: url('../images/Flash_Cartel_background.jpg');
+  display: inline;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 50px;
+  border-style: hidden;
+  border-width: 100px;
+}
+
+/* Div container tabulated */
+div.tab {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
 /* Login card container */
-form {
+form.login {
   width: 420px;
   padding: 40px;
   border-radius: 25px;
@@ -29,6 +46,14 @@ h1 {
 
 h1 span {
   color: #6cff4c;
+}
+
+h1.home-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 /* Tabs */
@@ -67,7 +92,7 @@ input[type=password]:focus{
   box-shadow: 0 0 10px #5cff3b;
 }
 
-/* Login button */
+/* Submit button */
 input[type=submit]{
   width: 100%;
   margin-top: 30px;
@@ -93,10 +118,22 @@ a{
   display: block;
   margin-top: 15px;
   font-size: 13px;
-  color: #cfd6e6;
+  color: #63fb58;
   text-decoration: none;
 }
 
 a:hover{
-  color: #6cff4c;
+  color: #2d9e13;
+}
+
+a.home-link {
+  margin-top: 30px;
+  font-size: 22px;
+  color: #9adf72;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
 }
