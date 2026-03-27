@@ -18,16 +18,16 @@ if (array_key_exists("user_id", $_SESSION)) {
       if ($_GET["error"] === "emptyinput") {
         echo "<p> Please fill in the form carefully! </p>";
       } else if ($_GET["error"] === "invaliduid") {
-        echo "<p> Please choose an appropriate and unique username! </p>";
+        echo "<p class=\"large\"> Please choose an appropriate and unique username! </p>";
       } else if ($_GET["error"] === "invalidemail") {
-        echo "<p> Please enter a valid email address! </p>";
+        echo "<p class=\"large\"> Please enter a valid email address! </p>";
       } else if ($_GET["error"] === "passwordsdontmatch") {
-        echo "<p> Your passwords do not match! </p>";
+        echo "<p class=\"large\"> Your passwords do not match! </p>";
       } else if ($_GET["error"] === "passwordnotstrong") {
-        echo "<p> Passwords need at least 8 characters & must include an uppercase letter,
+        echo "<p class=\"large\"> Passwords need at least 8 characters & must include an uppercase letter,
           a lowercase letter and a number. No symbols, though! </p>";
       } else if ($_GET["error"] === "none") {
-        echo "<p> You're now registered! </p>";
+        echo "<p class=\"large\"> You're now registered! </p>";
       }
     }
     ?>

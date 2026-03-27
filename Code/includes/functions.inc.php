@@ -20,7 +20,7 @@ function createUser($username, $email, $password)
   // return $resultSet;
 }
 
-
+// Connect to database
 function getConnection(): PDO
 {
   // Read .ini file and create associative array with database connection details.
@@ -42,6 +42,16 @@ function getConnection(): PDO
     echo "Connection failed: " . $exception->getMessage();
   }
   return $conn;
+}
+
+// Get the names of the user's card decks
+function getDecks(): array
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("SELECT * FROM decks ORDER BY deck_name");
+  $stmt->execute();
+  $decks = $stmt->fetchAll();
+  return $decks;
 }
 
 

@@ -2,6 +2,7 @@
 $pageTitle = "View Cards";
 include "header.php";
 
+// Check that user is signed in
 if (!array_key_exists("user_id", $_SESSION)) {
   header("location: index.php");
   exit();

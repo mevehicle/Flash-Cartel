@@ -10,7 +10,6 @@ body {
 
 /* Fabric image for home page */
 body.fabric {
-  background-image: url('../images/Flash_Cartel_background.jpg');
   display: inline;
   margin-left: 100px;
   margin-right: 100px;
@@ -63,6 +62,11 @@ h2 {
   color: #9adf72;
 }
 
+/* Large text */
+p.large {
+  font-size: large;
+}
+
 /* Labels */
 label {
   display: block;
@@ -86,10 +90,35 @@ input[type=password]{
   outline: none;
 }
 
+/* Input fields for card creation */
+input.card[type=text],
+input.card[type=password]{
+  width: 100%;
+  height: 200px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #5cff3b;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
 /* Input focus glow */
 input[type=text]:focus,
 input[type=password]:focus{
   box-shadow: 0 0 10px #5cff3b;
+}
+
+/* Drop-down menu */
+select{
+  width: 100%;
+  background-color: aliceblue;
+  color: black;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border: 2px solid #5cff3b;
+  padding: 10px;
 }
 
 /* Submit button */
@@ -137,3 +166,4 @@ a.home-link {
   align-items: center;
   padding: 10px 20px;
 }
+
