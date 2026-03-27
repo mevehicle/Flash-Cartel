@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     exit();
   }
 
-
+  // Retrieve values of variables from $_POST global array
   $deck_name = $_POST["deck_name"];
   $question = htmlspecialchars($_POST["question"]);
   $answer = htmlspecialchars($_POST["answer"]);
@@ -27,7 +27,9 @@ if (isset($_POST["submit"])) {
 
   $conn = getConnection();
 
-  $stmt = $conn->prepare("INSERT INTO 'cards'(deck_id, question, answer) VALUES
+  $deck_id = getDeckId($user_id, $deck_name);
+
+  $stmt = $conn->prepare("INSERT INTO cards(deck_id, question, answer) VALUES
   (:user_id, :question, :answer)");
   $stmt->bindValue(':user_id', $user_id);
   $stmt->bindValue(':question', $question);

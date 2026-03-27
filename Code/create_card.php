@@ -25,10 +25,6 @@ if (isset($_POST) && ((isset($_POST["question"])) || (isset($_POST["answer"]))))
       <img src="images/logo.jpg" alt="Flash Cartel logo" />
     </a>
   </div>
-  <div>
-    <br>
-    <a class="home-link" href="includes/logout.inc.php">Logout</a>
-  </div>
   <br>
   <div class="tab">
     <h1>Create a new card</h1>

@@ -44,6 +44,21 @@ function getConnection(): PDO
   return $conn;
 }
 
+// Get deck_id number associated with a deck name and user_id
+function getDeckId($user_id, $deck_name)
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("SELECT deck_id FROM decks WHERE user_id = :user_id
+   AND deck_name = :deck_name");
+  $stmt->bindValue(':user_id', $user_id);
+  $stmt->bindValue(':deck_name', $deck_name);
+  $stmt->execute();
+  $deck_id = $stmt->fetch();
+  return $deck_id;
+}
+
+
+
 // Get the names of the user's card decks
 function getDecks(): array
 {
