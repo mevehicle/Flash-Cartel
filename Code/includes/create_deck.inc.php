@@ -1,6 +1,5 @@
 <?php
 session_start();
-$pageTitle = "Create Deck";
 
 // Check that user is signed in
 if (!array_key_exists("user_id", $_SESSION)) {
@@ -11,11 +10,10 @@ if (!array_key_exists("user_id", $_SESSION)) {
 // Check that form has been submitted
 if (isset($_POST["submit"])) {
   // Check whether user has submitted the name of a deck
-  if (!isset($_POST["deck_name"])) {
+  if (empty($_POST["deck_name"])) {
     header("location: ../create_deck.php?error=emptyinput");
     exit();
   }
-
 
   $deck_name = htmlspecialchars($_POST["deck_name"]);
   $user_id = $_SESSION["user_id"];
@@ -33,7 +31,6 @@ if (isset($_POST["submit"])) {
     header("location: ../create_deck.php?error=existsalready");
     exit();
   }
-
 
   $stmt = $conn->prepare("INSERT INTO decks(deck_name, user_id) VALUES
   (:deck_name, :user_id)");

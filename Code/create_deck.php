@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
     <h1 class="home-title">Create a new deck</h1>
     <form action="includes/create_deck.inc.php" method="post">
       <input type="text" name="deck_name" placeholder="Deck Name" required><br>
-      <button type="submit" name="submit">Create Deck</button>
+      <input type="submit" name="submit" value="Create Deck">
     </form>
   </div>
 

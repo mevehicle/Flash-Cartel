@@ -23,7 +23,8 @@ if (!array_key_exists("user_id", $_SESSION)) {
 
     <ul>
       <li><a class="home-link" href="create_deck.php">Create deck</a></li>
-      <li><a class="home-link" href="view_cards.php">View cards</a></li>
+      <!-- Link to View Cards initially leads to page to select a deck -->
+      <li><a class="home-link" href="view_deck.php">View cards</a></li>
       <li><a class="home-link" href="create_card.php">Create card</a></li>
       <li><a class="home-link" href="edit_card.php">Edit card</a></li>
       <li><a class="home-link" href="delete_card.php">Delete card</a></li>

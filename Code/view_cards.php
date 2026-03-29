@@ -1,4 +1,5 @@
 <?php
+require "includes/functions.inc.php";
 $pageTitle = "View Cards";
 include "header.php";
 
@@ -7,23 +8,95 @@ if (!array_key_exists("user_id", $_SESSION)) {
   header("location: index.php");
   exit();
 }
+if (isset($_GET)) {
+  // Check that user has selected a deck to view
+  if (isset($_GET["error"])) {
+    if ($_GET["error"] === "nodeck") {
+      echo "<p class=\"large\"> You must select a deck to view.</p>";
+    }
+  } else {
+    // Get deck_id from URL query string
+    $deck_id = $_GET["deck_id"];
+
+    // 'Download' deck from database into array $cards
+    $cards = getCards($deck_id);
+
+    // Work out which card to show, using cardNumber from URL query string
+    $cardNumber = (int) $_GET["cardNumber"];
+
+    // Check how many cards are in deck, in case user wants to see next card
+    $numberOfCards = getCardsInDeck($deck_id);
+
+    // Validate cardNumber in case of query string injection
+    $cardNumber = max(0, min($cardNumber, $numberOfCards - 1));
+
+    // Copy card number to use for previous and next card buttons
+    $baseCardNumber = $cardNumber;
+  }
+} else {
+  header("location: home.php");
+  exit();
+}
 ?>
 
-<body class="fabric">
-  <div class="tab">
+<body>
+  <br>
+  <div>
     <a href="home.php">
       <img src="images/logo.jpg" alt="Flash Cartel logo" />
     </a>
   </div>
-
-
-
-
-
-
-
-
-  <a class="home-link" href="includes/logout.inc.php">Logout</a>
+  <div class="tab">
+    <h1>View Cards</h1>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Question</th>
+      </tr>
+      <tr>
+        <td class="card"><?php echo $cards[$cardNumber]["question"] ?></td>
+      </tr>
+      <tr>
+        <th>Answer</th>
+      </tr>
+      <td class="card"><?php echo $cards[$cardNumber]["answer"] ?></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <!-- Submit button has hidden field to decrease value of cardNumber
+     from baseCardNumber, and wrap round to bottom of deck if at 0 -->
+    <form action="view_cards.php" method="get">
+      <input type="hidden" name="deck_id" value="<?php echo $deck_id; ?>">
+      <input type="hidden" name="cardNumber" value="
+        <?php if ($baseCardNumber > 0) {
+          $cardNumber = $baseCardNumber - 1;
+        } else {
+          $cardNumber = $numberOfCards - 1;
+        }
+        echo $cardNumber;
+        ?>">
+      <input type="submit" value="Previous Card">
+    </form>
+    <!-- Submit button has hidden field to increase value of cardNumber,
+    from baseCardNumber, and return to top of deck if at bottom -->
+    <form action="view_cards.php" method="get">
+      <input type="hidden" name="deck_id" value="<?php echo $deck_id; ?>">
+      <input type="hidden" name="cardNumber" value="
+        <?php if ($baseCardNumber < ($numberOfCards - 1)) {
+          $cardNumber = $baseCardNumber + 1;
+        } else {
+          $cardNumber = 0;
+        }
+        echo $cardNumber;
+        ?>">
+      <input type="submit" value="Next Card">
+    </form>
+  </div>
+  <div>
+    <a class="home-link" href="includes/logout.inc.php">Logout</a>
+  </div>
 
   <?php
   include "footer.php";
