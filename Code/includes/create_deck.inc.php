@@ -8,7 +8,7 @@ if (!array_key_exists("user_id", $_SESSION)) {
 }
 
 // Check that form has been submitted
-if (isset($_POST["submit"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Check whether user has submitted the name of a deck
   if (empty($_POST["deck_name"])) {
     header("location: ../create_deck.php?error=emptyinput");

@@ -30,8 +30,8 @@ if (array_key_exists("user_id", $_SESSION)) {
     <br>
     <label for="username">Username:</label><br />
     <input type="text" id="username" name="username" placeholder="Username..." /><br />
-    <label for="pwd">Password:</label><br />
-    <input type="password" id="pwd" name="pwd" placeholder="Password..." />
+    <label for="password">Password:</label><br />
+    <input type="password" id="password" name="password" placeholder="Password..." />
     <input type="submit" name="submit" value="Submit" />
     <br>
     <p><a href="forgot.php">I forgot my password</a></p>

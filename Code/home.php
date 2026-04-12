@@ -16,6 +16,8 @@ if (!array_key_exists("user_id", $_SESSION)) {
       <?php echo $_SESSION["username"]; ?>!</h1>
     <br>
     <a href="includes/logout.inc.php">Logout</a>
+    <br>
+    <a href="edit_account.php">Edit Account</a>
   </div>
 
   <div class="tab">

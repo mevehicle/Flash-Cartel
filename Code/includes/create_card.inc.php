@@ -8,7 +8,7 @@ if (!array_key_exists("user_id", $_SESSION)) {
   exit();
 }
 
-if (isset($_POST["submit"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ((!isset($_POST["question"])) && (!isset($_POST["answer"]))) {
     header("location: ../create_card.php?error=emptyinput");
   } elseif (empty($_POST["deck_name"])) {

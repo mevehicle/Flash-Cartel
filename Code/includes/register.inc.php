@@ -2,14 +2,14 @@
 
 // Backend to register.php form
 
-if (isset($_POST["submit"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   require 'functions.inc.php';
 
   // Has user filled in all fields of form?
   if (
-    empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["pwd"])
-    || empty($_POST["pwdRepeat"])
+    empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])
+    || empty($_POST["passwordRepeat"])
   ) {
     header("location: ../register.php?error=emptyinput");
     exit();
@@ -17,8 +17,8 @@ if (isset($_POST["submit"])) {
 
   $username = trim($_POST["username"]);
   $email = trim($_POST["email"]);
-  $password = trim($_POST["pwd"]);
-  $passwordRepeat = trim($_POST["pwdRepeat"]);
+  $password = trim($_POST["password"]);
+  $passwordRepeat = trim($_POST["passwordRepeat"]);
 
   // Check if username is valid and doesn't already exist in database.
   if (invalidUid($username) !== false) {

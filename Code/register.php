@@ -39,10 +39,10 @@ if (array_key_exists("user_id", $_SESSION)) {
     <input type="text" id="username" name="username" placeholder="Username..." /><br />
     <label for="email">Please enter your email address:</label><br />
     <input type="text" id="email" name="email" placeholder="Email..." /><br />
-    <label for="pwd">Please choose a unique password:</label><br />
-    <input type="password" id="pwd" name="pwd" placeholder="Password..." /><br />
-    <label for="pwdRepeat">Please re-enter your password:</label><br />
-    <input type="password" id="pwdRepeat" name="pwdRepeat" placeholder="Password..." /><br />
+    <label for="password">Please choose a unique password:</label><br />
+    <input type="password" id="password" name="password" placeholder="Password..." /><br />
+    <label for="passwordRepeat">Please re-enter your password:</label><br />
+    <input type="password" id="passwordRepeat" name="passwordRepeat" placeholder="Password..." /><br />
     <input type="submit" name="submit" value="Submit" /><br>
   </form>
 
