@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS 'users';
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE `users` (
+CREATE TABLE users (
   `user_id` int(11) PRIMARY KEY,
   `username` varchar(30) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -52,9 +52,9 @@ CREATE TABLE decks (
 -- Table structure for table 'cards'
 --
 
-DROP TABLE IF EXISTS 'cards';
+DROP TABLE IF EXISTS cards;
 
-CREATE TABLE 'cards' (
+CREATE TABLE cards (
     card_id INT PRIMARY KEY AUTO_INCREMENT,
     deck_id INT NOT NULL REFERENCES decks(deck_id),
     question VARCHAR(1000),
