@@ -18,20 +18,27 @@ if (isset($_GET)) {
     // Get deck_id from URL query string
     $deck_id = $_GET["deck_id"];
 
-    // 'Download' deck from database into array $cards
-    $cards = getCards($deck_id);
+    // Validate $deck_id in case of query string injection
+    if (!checkDeckId($_SESSION['user_id'], $deck_id)) {
+      header("location: home.php");
+      exit();
+    } else {
 
-    // Work out which card to show, using cardNumber from URL query string
-    $cardNumber = (int) $_GET["cardNumber"];
+      // 'Download' deck from database into array $cards
+      $cards = getCards($deck_id);
 
-    // Check how many cards are in deck, in case user wants to see next card
-    $numberOfCards = getCardsInDeck($deck_id);
+      // Work out which card to show, using cardNumber from URL query string
+      $cardNumber = (int) $_GET["cardNumber"];
 
-    // Validate cardNumber in case of query string injection
-    $cardNumber = max(0, min($cardNumber, $numberOfCards - 1));
+      // Check how many cards are in deck, in case user wants to see next card
+      $numberOfCards = getCardsInDeck($deck_id);
 
-    // Copy card number to use for previous and next card buttons
-    $baseCardNumber = $cardNumber;
+      // Validate cardNumber in case of query string injection
+      $cardNumber = max(0, min($cardNumber, $numberOfCards - 1));
+
+      // Copy card number to use for previous and next card buttons
+      $baseCardNumber = $cardNumber;
+    }
   }
 } else {
   header("location: home.php");
@@ -92,6 +99,18 @@ if (isset($_GET)) {
         echo $cardNumber;
         ?>">
       <input type="submit" value="Next Card">
+    </form>
+  </div>
+  <div>
+    <form action="edit_card.php" method="get">
+      <input type="hidden" name="deck_id" value="<?php echo $deck_id; ?>">
+      <input type="hidden" name="cardNumber" value="<?php echo $baseCardNumber; ?>">
+      <input type="submit" value="Edit this Card">
+    </form>
+    <form action="delete_card.php" method="get">
+      <input type="hidden" name="deck_id" value="<?php echo $deck_id; ?>">
+      <input type="hidden" name="cardNumber" value="<?php echo $baseCardNumber; ?>">
+      <input type="submit" value="Delete this Card">
     </form>
   </div>
   <div>

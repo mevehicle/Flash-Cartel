@@ -7,6 +7,12 @@ if (!array_key_exists("user_id", $_SESSION)) {
   header("location: index.php");
   exit();
 }
+
+if (isset($_GET["error"])) {
+  if ($_GET["error"] === "unknownerror") {
+    echo "<p class=\"large\"> Sorry, there appears to have been a problem.</p>";
+  }
+}
 ?>
 
 <body class="fabric">
@@ -28,8 +34,7 @@ if (!array_key_exists("user_id", $_SESSION)) {
       <!-- Link to View Cards initially leads to page to select a deck -->
       <li><a class="home-link" href="view_deck.php">View cards</a></li>
       <li><a class="home-link" href="create_card.php">Create card</a></li>
-      <li><a class="home-link" href="edit_card.php">Edit card</a></li>
-      <li><a class="home-link" href="delete_card.php">Delete card</a></li>
+      <li><a class="home-link" href="delete_deck.php">Delete deck</a></li>
       <li><a class="home-link" href="test_yourself.php">Test yourself</a></li>
     </ul>
 

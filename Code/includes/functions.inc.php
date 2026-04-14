@@ -1,6 +1,19 @@
 <?php
 // This file contains functions that are used in the login and registration processes.
 
+// Check that a deck_id number exists in database
+function checkDeckId($user_id, $deck_id)
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("SELECT COUNT(deck_id) AS total FROM decks 
+    WHERE deck_id = :deck_id AND user_id = :user_id");
+  $stmt->bindValue(':user_id', $user_id);
+  $stmt->bindValue(':deck_id', $deck_id);
+  $stmt->execute();
+  $row = $stmt->fetch()["total"];
+  return $row;
+}
+
 
 // Check entered password valid
 function checkPassword($username, $password)
@@ -29,6 +42,20 @@ function checkPassword($username, $password)
 }
 
 
+// Create card in database, or edit its information
+function createCard($deck_id, $question, $answer)
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("INSERT INTO cards(deck_id, question, answer) 
+        VALUES (:deck_id, :question, :answer)");
+  $stmt->bindValue(':deck_id', $deck_id);
+  $stmt->bindValue(':question', $question);
+  $stmt->bindValue(':answer', $answer);
+  $stmt->execute();
+
+  // Close connection
+  $conn = null;
+}
 
 // Create user in database.
 function createUser($username, $email, $password)
@@ -44,6 +71,32 @@ function createUser($username, $email, $password)
   $stmt->bindValue(':password', $hashedPassword);
   $stmt->execute();
 
+  $conn = null;
+}
+
+
+/* Function to edit a pre-existing card
+  Card Number is not the primary key of the cards table,
+  it is the position in which that card is placed within its
+  specific deck, hence the use of offset and limit to
+  determine which card is to be targeted */
+function editCard($deck_id, $cardNumber, $question, $answer)
+{
+  $conn = getConnection();
+
+
+  $stmt = $conn->prepare("UPDATE cards SET
+  question=:question, answer=:answer WHERE card_id IN 
+  (SELECT card_id FROM (SELECT card_id FROM cards WHERE deck_id = :deck_id
+  LIMIT 1 OFFSET :cardNumber) x)");
+  $stmt->bindValue(':deck_id', $deck_id);
+  $stmt->bindValue(':question', $question);
+  $stmt->bindValue(':answer', $answer);
+  $stmt->bindValue(':cardNumber', intval($cardNumber), \PDO::PARAM_INT);
+
+  $stmt->execute();
+
+  // Close connection
   $conn = null;
 }
 
@@ -139,6 +192,7 @@ function getConnection(): PDO
   // COMMENT OUT THE ERROR HANDLING LINES TO CONNECT TO THE PRODUCTION DATABASE
   try {
     $conn = new PDO($dsn, $dbUser, $dbPassword);
+    $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   } catch (PDOException $exception) {
@@ -196,6 +250,18 @@ function getDecks($user_id): array
   $stmt->execute();
   $decks = $stmt->fetchAll();
   return $decks;
+}
+
+
+// Find how many decks the user has
+function getNumberOfDecks($user_id): int
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("SELECT COUNT(deck_id) AS total FROM decks WHERE user_id = :user_id");
+  $stmt->bindValue(':user_id', $user_id);
+  $stmt->execute();
+  $numberOfDecks = $stmt->fetch()['total'];
+  return $numberOfDecks;
 }
 
 

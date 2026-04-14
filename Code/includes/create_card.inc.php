@@ -26,16 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Query database for deck_id
     $deck_id = getDeckId($user_id, $deck_name);
 
-    $conn = getConnection();
-    $stmt = $conn->prepare("INSERT INTO cards(deck_id, question, answer) VALUES
-  (:deck_id, :question, :answer)");
-    $stmt->bindValue(':deck_id', $deck_id);
-    $stmt->bindValue(':question', $question);
-    $stmt->bindValue(':answer', $answer);
-    $stmt->execute();
-
-    // Close connection
-    $conn = null;
+    // Add the card to the database
+    createCard($deck_id, $question, $answer);
 
     header("location: ../create_card.php?error=none");
   }
