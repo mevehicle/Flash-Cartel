@@ -10,33 +10,40 @@ if (!array_key_exists("user_id", $_SESSION)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  if (isset($_GET["error"])) {
-    if ($_GET["error"] === "emptyinput") {
-      echo "<p class=\"large\"> You cannot leave the card blank.</p>";
-    }
-  }
-  // Get deck_id from URL query string
-  $deck_id = $_GET["deck_id"];
-
-  // Check how many decks user has, to ensure deck number won't be too high
-  $numberOfDecks = getNumberOfDecks($_SESSION['user_id']);
-
-  // Validate $deck_id in case of query string injection
-  if (!checkDeckId($_SESSION['user_id'], $deck_id)) {
+  // Check that both deck_id and cardNumber are available in query string
+  if (!isset($_GET['deck_id']) || !isset($_GET['cardNumber'])) {
     header("location: home.php");
     exit();
   } else {
+    if (isset($_GET["error"])) {
+      if ($_GET["error"] === "emptyinput") {
+        echo "<p class=\"large\"> You cannot leave the card blank.</p>";
+      }
+    }
+    // Get deck_id from URL query string
+    $deck_id = $_GET["deck_id"];
 
-    // 'Download' deck from database into array $cards
-    $cards = getCards($deck_id);
+    // Check how many decks user has, to ensure deck number won't be too high
+    $numberOfDecks = getNumberOfDecks($_SESSION['user_id']);
 
-    // Work out which card to show, using cardNumber from URL query string
-    $cardNumber = (int) $_GET["cardNumber"];
+    /* Validate $deck_id in case of query string injection,
+      so make sure deck belongs to current user */
+    if (!checkDeckId($_SESSION['user_id'], $deck_id)) {
+      header("location: home.php");
+      exit();
+    } else {
 
-    /* Validate cardNumber in case of query string injection
-      eg. is it higher than the number of cards in the deck */
-    $numberOfCards = getCardsInDeck($deck_id);
-    $cardNumber = max(0, min($cardNumber, $numberOfCards - 1));
+      // 'Download' deck from database into array $cards
+      $cards = getCards($deck_id);
+
+      // Work out which card to show, using cardNumber from URL query string
+      $cardNumber = (int) $_GET["cardNumber"];
+
+      /* Validate cardNumber in case of query string injection
+        eg. is it higher than the number of cards in the deck */
+      $numberOfCards = getCardsInDeck($deck_id);
+      $cardNumber = max(0, min($cardNumber, $numberOfCards - 1));
+    }
   }
 } else {
   header("location: home.php");

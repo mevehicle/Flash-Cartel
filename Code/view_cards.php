@@ -9,7 +9,7 @@ if (!array_key_exists("user_id", $_SESSION)) {
   exit();
 }
 if (isset($_GET)) {
-  // Check that user has selected a deck to view
+  // Check that a deck has been selected to view
   if (isset($_GET["error"])) {
     if ($_GET["error"] === "nodeck") {
       echo "<p class=\"large\"> You must select a deck to view.</p>";

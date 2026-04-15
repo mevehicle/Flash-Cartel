@@ -1,5 +1,4 @@
 <?php
-// This file contains functions that are used in the login and registration processes.
 
 // Check that a deck_id number exists in database
 function checkDeckId($user_id, $deck_id)
@@ -75,7 +74,28 @@ function createUser($username, $email, $password)
 }
 
 
-/* Function to edit a pre-existing card
+/* Function to delete a card from the database.
+  Card Number is not the primary key of the cards table,
+  it is the position in which that card is placed within its
+  specific deck, hence the use of offset and limit to
+  determine which card is to be targeted */
+function deleteCard($deck_id, $cardNumber)
+{
+  $conn = getConnection();
+  $stmt = $conn->prepare("DELETE FROM cards WHERE card_id IN 
+    (SELECT card_id FROM (SELECT card_id FROM cards WHERE deck_id = :deck_id
+    LIMIT 1 OFFSET :cardNumber) x)");
+  $stmt->bindValue(':deck_id', $deck_id);
+  $stmt->bindValue(':cardNumber', $cardNumber);
+
+  $stmt->execute();
+
+  // Close connection
+  $conn = null;
+}
+
+
+/* Function to edit a pre-existing card.
   Card Number is not the primary key of the cards table,
   it is the position in which that card is placed within its
   specific deck, hence the use of offset and limit to
@@ -83,16 +103,14 @@ function createUser($username, $email, $password)
 function editCard($deck_id, $cardNumber, $question, $answer)
 {
   $conn = getConnection();
-
-
   $stmt = $conn->prepare("UPDATE cards SET
-  question=:question, answer=:answer WHERE card_id IN 
-  (SELECT card_id FROM (SELECT card_id FROM cards WHERE deck_id = :deck_id
-  LIMIT 1 OFFSET :cardNumber) x)");
+    question=:question, answer=:answer WHERE card_id IN 
+    (SELECT card_id FROM (SELECT card_id FROM cards WHERE deck_id = :deck_id
+    LIMIT 1 OFFSET :cardNumber) x)");
   $stmt->bindValue(':deck_id', $deck_id);
   $stmt->bindValue(':question', $question);
   $stmt->bindValue(':answer', $answer);
-  $stmt->bindValue(':cardNumber', intval($cardNumber), \PDO::PARAM_INT);
+  $stmt->bindValue(':cardNumber', $cardNumber);
 
   $stmt->execute();
 

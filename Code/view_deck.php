@@ -9,10 +9,7 @@ if (!array_key_exists("user_id", $_SESSION)) {
   exit();
 }
 
-if (isset($_POST["submit"])) {
-  header("location: view_deck.inc.php");
-  exit();
-} else if (isset($_GET["error"])) {
+if (isset($_GET["error"])) {
   if ($_GET["error"] === "emptyinput") {
     echo "<p class=\"large\"> You didn't select one ! </p>";
   } else if ($_GET["error"] === "doesntexist") {
@@ -20,8 +17,6 @@ if (isset($_POST["submit"])) {
   } else if ($_GET["error"] === "emptydeck") {
     echo "<p class=\"large\"> That deck has no cards in it! </p>";
   }
-} else if (isset($_GET["deck"])) {
-  header("location: ../view_cards.php/deck=$deck_name");
 }
 ?>
 
