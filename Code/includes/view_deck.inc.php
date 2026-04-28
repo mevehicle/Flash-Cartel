@@ -9,6 +9,14 @@ if (!array_key_exists("user_id", $_SESSION)) {
 
 // Check that form has been submitted
 if (isset($_POST["submit"])) {
+  /*
+   Check if the reason why the decks are being viewed is included,
+   eg. to view the cards or to test yourself
+  */
+  if (!isset($_POST['action'])) {
+    header("location: ../home.php?error=unknownerror");
+    exit();
+  }
   // Check whether user has submitted the name of a deck
   if (!isset($_POST["deck_name"])) {
     header("location: ../view_deck.php?error=emptyinput");
@@ -30,11 +38,21 @@ if (isset($_POST["submit"])) {
   } else { // If deck does exist, grab its ID to check if it's empty
     $deck_id = getDeckId($user_id, $deck_name);
     $cards = getCards($deck_id);
-    if (empty($cards)) {
-      header("location: ../view_deck.php?error=emptydeck");
+    // Check how many cards are in deck
+    $numberOfCards = getCardsInDeck($deck_id);
+    if ($numberOfCards = 0) {
+      header("location: view_deck.php/error=emptydeck");
       exit();
-    } else { // If the deck exists and is not empty, pass on its name to view_cards.php, to show first card
+    }
+    if ($_POST['action'] == "view") {
+      // If the deck exists and is not empty, pass on its name to view_cards.php, to show first card
       header("location: ../view_cards.php?deck_id=$deck_id&cardNumber=0");
+      exit();
+    } else { // if action = "test"
+      // Randomly select card to show
+      // $cardNumber = rand(0, max(0, $numberOfCards - 1));
+      // Pass on deck_id and random cardNumber to test_yourself_question.php
+      header("location: ../test_yourself.php?view=question&deck_id=$deck_id");
       exit();
     }
   }

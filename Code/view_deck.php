@@ -11,13 +11,22 @@ if (!array_key_exists("user_id", $_SESSION)) {
 
 if (isset($_GET["error"])) {
   if ($_GET["error"] === "emptyinput") {
-    echo "<p class=\"large\"> You didn't select one ! </p>";
+    echo "<p class=\"large\"> You didn't select a deck ! </p>";
   } else if ($_GET["error"] === "doesntexist") {
     echo "<p class=\"large\"> You haven't created that deck yet ! </p>";
   } else if ($_GET["error"] === "emptydeck") {
     echo "<p class=\"large\"> That deck has no cards in it! </p>";
   }
 }
+
+// check that the reason why the deck is being viewed has been included in query string
+if (!isset($_GET['action'])) {
+  header("location: home.php?error=unknownerror");
+  exit();
+} else {
+  $action = $_GET['action'];
+}
+
 ?>
 
 <body class="fabric">
@@ -51,6 +60,7 @@ if (isset($_GET["error"])) {
         }
         ?>
       </select><br>
+      <input type="hidden" name="action" value=<?php echo $action ?>>
       <input type="submit" name="submit" value="View Deck">
     </form>
   </div>

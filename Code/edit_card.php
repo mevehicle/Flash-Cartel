@@ -75,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <a class="home-link" href="view_cards.php?deck_id=<?php echo $deck_id ?>&cardNumber=<?php echo $cardNumber ?>">Return to View Cards</a>
   </div>
   </div>
-  <a class="home-link" href="includes/logout.inc.php">Logout</a>
-
+  <div>
+    <a class="home-link" href="includes/logout.inc.php">Logout</a>
+  </div>
   <?php
   include "footer.php";
