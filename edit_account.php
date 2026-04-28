@@ -31,7 +31,8 @@ require 'includes/functions.inc.php';
         } else if ($_GET["error"] === "emptyinput") {
           echo "<p class=\"large\"> Please fill in the form carefully! </p>";
         } else if ($_GET["error"] === "invaliduid") {
-          echo "<p class=\"large\"> Please choose an appropriate and unique new username! </p>";
+          $uidDetail = isset($_GET["detail"]) ? htmlspecialchars($_GET["detail"]) : "Username must be 3-20 letters/numbers only.";
+          echo "<p class=\"large\"> $uidDetail </p>";
         } else if ($_GET["error"] === "invalidemail") {
           echo "<p class=\"large\"> Please enter a valid new email address! </p>";
         } else if ($_GET["error"] === "passwordsdontmatch") {

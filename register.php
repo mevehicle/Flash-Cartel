@@ -18,7 +18,8 @@ if (array_key_exists("user_id", $_SESSION)) {
       if ($_GET["error"] === "emptyinput") {
         echo "<p> Please fill in the form carefully! </p>";
       } else if ($_GET["error"] === "invaliduid") {
-        echo "<p class=\"large\"> Please choose an appropriate and unique username! </p>";
+        $uidDetail = isset($_GET["detail"]) ? htmlspecialchars($_GET["detail"]) : "Username must be 3-20 letters/numbers only.";
+        echo "<p class=\"large\"> $uidDetail </p>";
       } else if ($_GET["error"] === "invalidemail") {
         echo "<p class=\"large\"> Please enter a valid email address! </p>";
       } else if ($_GET["error"] === "passwordsdontmatch") {

@@ -38,24 +38,37 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flash Cartel</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
 <body class="fabric">
   <div class="tab">
-    <a href="home.php">
-      <img src="images/logo.jpg" alt="Flash Cartel logo" />
+    <a href="../home.php">
+      <img src="../images/logo.jpg" alt="Flash Cartel logo" />
     </a>
-    <a class="home-link" href="includes/logout.inc.php">Logout</a>
+    <a class="home-link" href="../includes/logout.inc.php">Logout</a>
   </div>
   <br>
   <div>
     <p class="large">Are you sure you want to delete <?php echo $deck_name ?>?</p>
-    <form action="" method="post">
+    <form action="delete_deck_2.inc.php" method="post">
       <input type="hidden" name="deck_id" value="<?php echo $deck_id; ?>">
       <input type="submit" name="submit" value="Yes" />
       <a href="../home.php">
-        <p class="large">No</p><br>
+        <p class="large">No</p>
+      </a>
+    </form>
   </div>
   <div>
-    <a class="home-link" href="includes/logout.inc.php">Logout</a>
+    <a class="home-link" href="../includes/logout.inc.php">Logout</a>
   </div>
   <?php
-  include "footer.php";
+  include "../footer.php";

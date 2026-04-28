@@ -13,6 +13,7 @@ $errors = [
     'wronglogin'  => 'Incorrect username or password.',
 ];
 $errorMsg = isset($_GET['error']) ? ($errors[$_GET['error']] ?? '') : '';
+$successMsg = isset($_GET['success']) && $_GET['success'] === 'registered' ? 'Account created! You can now log in.' : '';
 ?>
 <body class="auth-page">
 
@@ -27,9 +28,12 @@ $errorMsg = isset($_GET['error']) ? ($errors[$_GET['error']] ?? '') : '';
     <div class="msg msg-error"><?= htmlspecialchars($errorMsg) ?></div>
   <?php endif; ?>
 
+  <?php if ($successMsg): ?>
+    <div class="msg msg-success"><?= htmlspecialchars($successMsg) ?></div>
+  <?php endif; ?>
+
   <!-- Choice view shown by default; JS swaps panels -->
   <div id="view-choice">
-    <p class="auth-tagline">Your AI-powered flashcard study companion.</p>
     <button class="choice-btn choice-login" onclick="show('login')">Login</button>
     <button class="choice-btn choice-signup" onclick="show('register')">Sign Up to Flash Cartel</button>
   </div>

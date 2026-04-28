@@ -21,8 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $passwordRepeat = trim($_POST["passwordRepeat"]);
 
   // Check if username is valid and doesn't already exist in database.
-  if (invalidUid($username) !== false) {
-    header("location: ../register.php?error=invaliduid");
+  $uidError = invalidUid($username);
+  if ($uidError !== false) {
+    header("location: ../register.php?error=invaliduid&detail=" . urlencode($uidError));
     exit();
   }
 
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // If all the above functions return false, create user in database.
   createUser($username, $email, $password);
-  header("location: ../register.php?error=none");
+  header("location: ../index.php?success=registered");
   exit();
 } else {
   // If user tries to access this page without submitting form, send them back to registration page.

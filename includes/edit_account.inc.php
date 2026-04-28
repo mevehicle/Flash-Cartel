@@ -36,8 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST["newUsername"])) {
     $newUsername = trim($_POST["newUsername"]);
     // Check if newUsername is valid and doesn't already exist in database.
-    if (invalidUid($newUsername) !== false) {
-      header("location: ../edit_account.php?error=invaliduid");
+    $uidError = invalidUid($newUsername);
+    if ($uidError !== false) {
+      header("location: ../edit_account.php?error=invaliduid&detail=" . urlencode($uidError));
       exit();
     } else {
       // Alter username in database
@@ -65,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newPassword = trim($_POST["newPassword"]);
     $newPasswordRepeat = trim($_POST["newPasswordRepeat"]);
     // Check if passwords match.
-    if (pwdMatch($newPassword, $newPasswordRepeat) !== false) {
+    if (pwdMismatch($newPassword, $newPasswordRepeat)) {
+
       header("location: ../edit_account.php?error=passwordsdontmatch");
       exit();
     }
