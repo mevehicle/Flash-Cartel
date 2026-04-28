@@ -3,16 +3,17 @@
 // Backend to login.php
 
 // Check if user has submitted form.
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST["submit"])) {
 
   // Has user filled in all fields of form?
-  if (empty($_POST["username"]) || empty($_POST["password"])) {
+  if //(!array_key_exists("username", $_POST) || !array_key_exists("pwd", $_POST)) {
+  (empty($_POST["username"]) || empty($_POST["pwd"])) {
     header("location: ../index.php?error=emptyinput");
     exit();
   }
 
   $username = trim($_POST["username"]);
-  $password = trim($_POST["password"]);
+  $password = trim($_POST["pwd"]);
 
   require_once 'functions.inc.php';
 

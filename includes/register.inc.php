@@ -2,14 +2,14 @@
 
 // Backend to register.php form
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST["submit"])) {
 
   require 'functions.inc.php';
 
   // Has user filled in all fields of form?
   if (
-    empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])
-    || empty($_POST["passwordRepeat"])
+    empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["pwd"])
+    || empty($_POST["pwdRepeat"])
   ) {
     header("location: ../register.php?error=emptyinput");
     exit();
@@ -17,13 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $username = trim($_POST["username"]);
   $email = trim($_POST["email"]);
-  $password = trim($_POST["password"]);
-  $passwordRepeat = trim($_POST["passwordRepeat"]);
+  $password = trim($_POST["pwd"]);
+  $passwordRepeat = trim($_POST["pwdRepeat"]);
 
   // Check if username is valid and doesn't already exist in database.
-  $uidError = invalidUid($username);
-  if ($uidError !== false) {
-    header("location: ../register.php?error=invaliduid&detail=" . urlencode($uidError));
+  if (invalidUid($username) !== false) {
+    header("location: ../register.php?error=invaliduid");
     exit();
   }
 
@@ -34,8 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   // Check if passwords match.
-  if (pwdMismatch($password, $passwordRepeat)) {
-
+  if (pwdMatch($password, $passwordRepeat) !== false) {
     header("location: ../register.php?error=passwordsdontmatch");
     exit();
   }
@@ -46,11 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
   }
 
-  
+  // Check if username is already taken.
+  if (uidExists($conn, $username) !== false) {
+    header("location: ../register.php?error=usernametaken");
+    exit();
+  }
 
   // If all the above functions return false, create user in database.
   createUser($username, $email, $password);
-  header("location: ../index.php?success=registered");
+  header("location: ../register.php?error=none");
   exit();
 } else {
   // If user tries to access this page without submitting form, send them back to registration page.
